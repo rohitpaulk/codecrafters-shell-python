@@ -1,4 +1,5 @@
 import os
+import subprocess
 import sys
 
 from typing import Optional
@@ -48,6 +49,8 @@ def main():
         if command in builtins:
             builtins[command](args)
             continue
+        elif executable := locate_executable(command):
+            subprocess.run([executable, *args])
         else:
             print(f"{command}: command not found")
 
