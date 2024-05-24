@@ -1,4 +1,17 @@
+import os
 import sys
+
+from typing import Optional
+
+
+def locate_executable(command) -> Optional[str]:
+    path = os.environ.get("PATH", "")
+
+    for directory in path.split(":"):
+        file_path = os.path.join(directory, command)
+
+        if os.path.isfile(file_path) and os.access(file_path, os.X_OK):
+            return file_path
 
 
 def handle_exit(args):
@@ -12,6 +25,8 @@ def handle_echo(args):
 def handle_type(args):
     if args[0] in builtins:
         print(f"{args[0]} is a shell builtin")
+    elif executable := locate_executable(args[0]):
+        print(f"{args[0]} is {executable}")
     else:
         print(f"{args[0]} not found")
 
