@@ -11,9 +11,12 @@ def main():
         if command == "exit":
             exit_code = int(args[0]) if args else 0
             sys.exit(exit_code)
+        elif command == "echo":
+            print(" ".join(args))
         else:
-            sys.stdout.write(f"{command}: command not found\n")
-            sys.stdout.flush()
+            print(f"{command}: command not found")
+
+        sys.stdout.flush()
 
 
 if __name__ == "__main__":
