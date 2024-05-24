@@ -5,7 +5,9 @@ def main():
     sys.stdout.write("$ ")
     sys.stdout.flush()
 
-    input()
+    command = input()
+    sys.stdout.write(f"Command: {command}\n")
+    sys.stdout.flush()
 
 
 if __name__ == "__main__":
